@@ -12,6 +12,13 @@ import Meta
 
 public protocol MetaTextViewDelegate: AnyObject {
     func metaTextView(_ metaTextView: MetaTextView, didSelectMeta meta: Meta)
+    func metaTextViewDidTapNonEntity(_ metaTextView: MetaTextView)
+}
+
+extension MetaTextViewDelegate {
+    func metaTextViewDidTapNonEntity(_ metaTextView: MetaTextView) {
+        // optional method
+    }
 }
 
 public class MetaTextView: UITextView {
@@ -83,8 +90,11 @@ extension MetaTextView {
             }
 
             let point = sender.location(in: self)
-            guard let meta = meta(at: point) else { return }
-            linkDelegate?.metaTextView(self, didSelectMeta: meta)
+            if let meta = meta(at: point) {
+                linkDelegate?.metaTextView(self, didSelectMeta: meta)
+            } else {
+                linkDelegate?.metaTextViewDidTapNonEntity(self)
+            }
         default:
             break
         }
