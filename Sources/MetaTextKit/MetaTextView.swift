@@ -15,7 +15,7 @@ public protocol MetaTextViewDelegate: AnyObject {
     func metaTextViewDidTapNonEntity(_ metaTextView: MetaTextView)
 }
 
-extension MetaTextViewDelegate {
+public extension MetaTextViewDelegate {
     func metaTextViewDidTapNonEntity(_ metaTextView: MetaTextView) {
         // optional method
     }
